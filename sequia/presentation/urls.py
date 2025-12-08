@@ -1,5 +1,11 @@
 from django.urls import path
-from .views import HomeView, MedidaList, MedidaCreate, MedidaUpdate, MedidaDelete
+from .views import (
+    HomeView,
+    MedidaList,
+    MedidaCreate,
+    MedidaUpdate,
+    MedidaDelete,
+)
 
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),

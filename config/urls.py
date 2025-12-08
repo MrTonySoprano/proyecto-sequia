@@ -6,12 +6,8 @@ from rest_framework.schemas import get_schema_view
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    # 👇 Home del sitio (página principal)
-    path(
-        "",
-        TemplateView.as_view(template_name="sequia/home.html"),
-        name="home",
-    ),
+    # 👇 Capa de presentación (Home + CRUD de medidas)
+    path("", include("sequia.presentation.urls")),
 
     # Admin de Django
     path("admin/", admin.site.urls),
@@ -19,14 +15,14 @@ urlpatterns = [
     # API principal
     path("api/", include("sequia.api.urls")),
 
-    # Auth (registro/login/logout, vistas de accounts)
+    # Auth (registro/login/logout)
     path("api/auth/", include("sequia.accounts.urls")),
 
-    # JWT “clásico”
+    # JWT
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 
-    # Documentación
+    # Documentación de la API
     path("api/schema/", get_schema_view(title="API Sequia"), name="openapi-schema"),
     path(
         "api/docs/",
