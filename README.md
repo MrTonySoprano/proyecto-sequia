@@ -42,8 +42,7 @@ python -m venv .venv
 
 .\\.venv\\Scripts\\activate
 
-
-Proyecto desarrollado como parte de una evaluación académica sobre Django.
+Este proyecto fue desarrollado como parte de una evaluación académica utilizando Django.
 
 
 
