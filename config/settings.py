@@ -1,6 +1,6 @@
 """
 Configuración de Django para el proyecto Sequia.
-Incluye API REST (DRF + JWT), MariaDB, CORS y zona horaria de Chile.
+Incluye API REST (DRF + JWT), CORS y zona horaria de Chile.
 """
 
 from pathlib import Path
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     # Aplicaciones del proyecto
     "sequia.apps.SequiaConfig",
-    "sequia.accounts",  # 👈 app creada para registro/login
+    "sequia.accounts",  # app creada para registro/login
 
     # Librerías externas
     "rest_framework",
@@ -62,7 +62,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-------------------------------------------------------
+
+# -----------------------------------------------------------
 # CONFIGURACIÓN DE URLS Y TEMPLATES
 # -----------------------------------------------------------
 ROOT_URLCONF = "config.urls"
@@ -85,20 +86,12 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 # -----------------------------------------------------------
-# BASE DE DATOS (MariaDB / MySQL)
+# BASE DE DATOS (SQLite para despliegue sencillo y local)
 # -----------------------------------------------------------
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",  # MariaDB usa el backend MySQL
-        "NAME": os.getenv("DB_NAME", "sequia_db"),
-        "USER": os.getenv("DB_USER", "sequia_user"),
-        "PASSWORD": os.getenv("DB_PASS", "Tu_Clave_Segura_2025"),
-        "HOST": os.getenv("DB_HOST", "localhost"),
-        "PORT": os.getenv("DB_PORT", "3306"),
-        "OPTIONS": {
-            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
-            "charset": "utf8mb4",
-        },
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
@@ -136,7 +129,7 @@ SIMPLE_JWT = {
 # -----------------------------------------------------------
 # CORS (Cross-Origin Resource Sharing)
 # -----------------------------------------------------------
-CORS_ALLOW_ALL_ORIGINS = True  # 👈 solo para desarrollo
+CORS_ALLOW_ALL_ORIGINS = True  # solo para desarrollo
 # En producción, cambia a:
 # CORS_ALLOW_ALL_ORIGINS = False
 # CORS_ALLOWED_ORIGINS = ["https://tu-frontend.com", "http://localhost:5173"]
@@ -186,4 +179,3 @@ SESSION_COOKIE_SECURE = False      # True en producción
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = "DENY"
-
