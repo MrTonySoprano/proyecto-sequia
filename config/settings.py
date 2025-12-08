@@ -24,7 +24,7 @@ SECRET_KEY = os.getenv(
     "django-insecure-1fxqzdnk=93lc6zbf(&f^3&oe93^do!uow3x1z8zz5f4cz5!#f"
 )
 DEBUG = True
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "0.0.0.0", "192.168.56.1"]
+ALLOWED_HOSTS = ["*"]
 
 # -----------------------------------------------------------
 # APLICACIONES INSTALADAS
@@ -53,8 +53,8 @@ INSTALLED_APPS = [
 # MIDDLEWARE
 # -----------------------------------------------------------
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",  # 👈 siempre primero
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -62,8 +62,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-
-# -----------------------------------------------------------
+------------------------------------------------------
 # CONFIGURACIÓN DE URLS Y TEMPLATES
 # -----------------------------------------------------------
 ROOT_URLCONF = "config.urls"
@@ -164,6 +163,8 @@ USE_TZ = True
 # ARCHIVOS ESTÁTICOS
 # -----------------------------------------------------------
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # -----------------------------------------------------------
 # CONFIGURACIÓN LOGIN / LOGOUT (admin o sesiones)
