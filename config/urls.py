@@ -40,6 +40,6 @@ urlpatterns = [
         name="api-docs",
     ),
 
-    # Incluir las URLs de la app 'sequia' (home + medidas)
-    path("", include("sequia.urls")),  # ← Sin prefijo
+    # Incluir las URLs de la app 'sequia' desde presentation
+    path("", include("sequia.presentation.urls")),  # ← CAMBIO AQUÍ
 ]
