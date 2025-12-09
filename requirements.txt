@@ -25,3 +25,4 @@ urllib3==2.5.0
 whitenoise==6.11.0
 pyyaml
 inflection
+django-filter==22.1  
